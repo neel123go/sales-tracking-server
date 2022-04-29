@@ -33,6 +33,21 @@ async function run() {
             res.send(result);
         });
 
+        // Update Inventory Item Quantity
+        app.put('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedItem = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    quantity: `${updatedItem.newQuantity}`
+                }
+            };
+            const result = await itemsCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        })
+
         // Get Single Inventory Item
         app.get('/inventory/:id', async (req, res) => {
             const id = req.params.id;
