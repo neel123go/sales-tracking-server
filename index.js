@@ -18,10 +18,18 @@ async function run() {
         await client.connect();
         const itemsCollection = client.db("WareHouse").collection("Items");
 
-        // Get All items
+        // Post All items
         app.post('/addItem', async (req, res) => {
             const item = req.body;
             const result = await itemsCollection.insertOne(item);
+            res.send(result);
+        });
+
+        // Get All Items
+        app.get('/items', async (req, res) => {
+            const query = {};
+            const cursor = itemsCollection.find(query);
+            const result = await cursor.toArray();
             res.send(result);
         })
 
