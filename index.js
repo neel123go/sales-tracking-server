@@ -107,7 +107,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello from Neel');
+    res.send('Running SalesTracking Server');
 });
 
 app.listen(port, () => {
