@@ -114,7 +114,6 @@ async function run() {
 }
 run().catch(console.dir);
 
-
 app.get('/', (req, res) => {
     res.send('Running SalesTracking Server');
 });
@@ -122,19 +121,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log('Listening to the port', port);
 });
-
-
-// // verify token function
-// function verifyToken(token) {
-//     let email;
-//     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, decoded) {
-//         if (err) {
-//             email = 'Invalid email'
-//         }
-//         if (decoded) {
-//             console.log(decoded)
-//             email = decoded
-//         }
-//     });
-//     return email;
-// }
