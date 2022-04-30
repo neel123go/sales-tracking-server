@@ -32,6 +32,7 @@ async function run() {
     try {
         await client.connect();
         const itemsCollection = client.db("WareHouse").collection("Items");
+        const questionCollection = client.db("WareHouse").collection("questions");
 
         // Verify user
         app.post('/login', async (req, res) => {
@@ -39,6 +40,14 @@ async function run() {
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
             res.send({ accessToken });
         });
+
+        // Post User Question
+        app.post('/question', async (req, res) => {
+            const question = req.body;
+            // console.log(question);
+            const result = await questionCollection.insertOne(question);
+            res.send(result);
+        })
 
         // Post All items
         app.post('/addItem', async (req, res) => {
